@@ -8,17 +8,19 @@ namespace SA2_Carlos
         static void Main(string[] args)
         {
             List<Receitas> receitas = new List<Receitas>();
+            List<Ingredientes> ingredientes = new List<Ingredientes>();
             Menu:
             Console.Clear();
-            Console.WriteLine("1 - Adicionar produto.");
-            Console.WriteLine("2 - Editar produto.");
-            Console.WriteLine("3 - Excluir produto.");
-            Console.WriteLine("4 - Lista de receitas.");
-            Console.WriteLine("5 - Receitas por dificuldade.");
-            Console.WriteLine("6 - Receitas por Categoria.");
-            Console.WriteLine("7 - Receitas por tempo de preparo.");
-            Console.WriteLine("8 - Cotação de ingredientes.");
-            Console.WriteLine("9 - Valor estimado da receita.");
+            Console.WriteLine("1 - Adicionar Receita.");
+            Console.WriteLine("2 - Adicionar ingredientes");
+            Console.WriteLine("3 - Editar produto.");
+            Console.WriteLine("4 - Excluir produto.");
+            Console.WriteLine("5 - Lista de receitas.");
+            Console.WriteLine("6 - Receitas por dificuldade.");
+            Console.WriteLine("7 - Receitas por Categoria.");
+            Console.WriteLine("8 - Receitas por tempo de preparo.");
+            Console.WriteLine("9 - Cotação de ingredientes.");
+            Console.WriteLine("10 - Valor estimado da receita.");
             Console.WriteLine("0 - Adicionar produto.");
             Console.WriteLine();
             Console.Write("Escolha uma opção: ");
@@ -105,17 +107,43 @@ namespace SA2_Carlos
                     R.descricao = Console.ReadLine();
                     Console.Clear();
                     Console.Write("Insira os ingredientes usados na receita (ordem alfabética): ");
-                    R.ingredientes = Console.ReadLine();
                     R.codReceita = receitas.Count + 1;
                     receitas.Add(R);
                     goto Menu;
-                    
+
                 case 2:
+                    Ingredientes ingrediente = new Ingredientes();
+                    Console.Clear();
+                    Console.Write("Insira o nome do ingrediente que deseja adicionar: ");
+                    ingrediente.nomeIngrediente = Console.ReadLine();
+                    Console.Clear();
+                    ingrediente.codIngrediente = ingredientes.Count + 1;
+                    ingredientes.Add(ingrediente);
+                    Console.Write("Deseja adicionar mais algum ingrediente?(1 = Sim, 2 = Não): ");
+                    decisao = Convert.ToInt16(Console.ReadLine());
+                    Console.Clear();
+                    if (decisao == 1)
+                    {
+                        goto case 2;
+                    }
+                    if (decisao == 2)
+                    {
+                        goto Menu;
+                    }
+                    Console.WriteLine("Opção inválida.");
+                    Console.ReadKey();
+                    goto Menu;
+                    
+                case 3:
                     Console.Clear();
                     foreach(var item in receitas)
                     {
-                        Console.WriteLine($"Nome: {item.nomeReceita} | Tempo de preparo: {item.tempoPreparacao} | Dificuldade: {item.dificuldade} | " +
-                            $"Porção: {item.porcao} pessoas | Categoria: {item.categoria} | \n Descrição: {item.descricao} \n Ingretientes: {item.ingredientes} |");
+                        Console.WriteLine($"Código da receita: {item.codReceita} | Nome: {item.nomeReceita} | Tempo de preparo: {item.tempoPreparacao} | Dificuldade: {item.dificuldade} | " +
+                            $"Porção: {item.porcao} pessoas | Categoria: {item.categoria} | \n Descrição: {item.descricao} \n Ingredientes: \n |");
+                        foreach(var r in receitas)
+                        {
+                            Console.WriteLine(r.ingredientes);
+                        }
                         Console.WriteLine();
                     }
                     Console.Write("Insira o CODIGO da receita que deseja editar: ");
@@ -126,7 +154,7 @@ namespace SA2_Carlos
                         Console.WriteLine("Código inválido.");
                         Console.ReadKey();
                         Console.Clear();
-                        goto case 2;
+                        goto case 3;
                     }
                 subMenu:
                     Console.Clear();
@@ -259,7 +287,7 @@ namespace SA2_Carlos
                     }
                     break;
                     
-                case 3:
+                case 4:
                     Console.Clear();
                     foreach (var item in receitas)
                     {
@@ -280,7 +308,7 @@ namespace SA2_Carlos
                     receitas.Remove(removerLista);
                     goto Menu;
                     
-                case 4:
+                case 5:
                     Console.Clear();
                     foreach (var item in receitas)
                     {
@@ -300,7 +328,7 @@ namespace SA2_Carlos
                     Console.ReadKey();
                     break;
 
-                case 5:
+                case 6:
                     Console.Clear();
                     receitas.Sort(delegate (Receitas r1, Receitas r2)
                     {
@@ -325,7 +353,7 @@ namespace SA2_Carlos
                     Console.ReadKey();
                     break;
                     
-                case 6:
+                case 7:
                     Console.Clear();
                     receitas.Sort(delegate (Receitas r1, Receitas r2)
                     {
@@ -350,7 +378,7 @@ namespace SA2_Carlos
                     Console.ReadKey();
                     break;
                     
-                case 7:
+                case 8:
                     Console.Clear();
                     receitas.Sort(delegate (Receitas r1, Receitas r2)
                     {
@@ -373,7 +401,7 @@ namespace SA2_Carlos
                     Console.ReadKey();
                     break;
 
-                case 8:
+                case 9:
                     Console.Clear();
                     Console.Write("Deseja retornar ao menu? (1 = sim, 2 = não): ");
                     decisao = Convert.ToInt16(Console.ReadLine());
@@ -386,7 +414,7 @@ namespace SA2_Carlos
                     Console.ReadKey();
                     break;
 
-                case 9:
+                case 10:
                     Console.Clear();
                     Console.Write("Deseja retornar ao menu? (1 = sim, 2 = não): ");
                     decisao = Convert.ToInt16(Console.ReadLine());

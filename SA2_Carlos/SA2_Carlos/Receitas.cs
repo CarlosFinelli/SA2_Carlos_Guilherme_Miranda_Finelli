@@ -12,7 +12,7 @@ namespace SA2_Carlos
         public int porcao { get; set; }
         public String categoria { get; set; }
         public String descricao { get; set; }
-        public String ingredientes { get; set; }
+        public List<Ingredientes> ingredientes { get; set; }
         public int codReceita { get; set; }
     }
 }
