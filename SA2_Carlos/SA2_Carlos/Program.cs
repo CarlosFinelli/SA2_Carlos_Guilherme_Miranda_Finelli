@@ -143,6 +143,12 @@ namespace SA2_Carlos
                     Console.Write("Insira o preço do ingrediente: ");
                     ingrediente.precoIngrediente = Convert.ToInt16(Console.ReadLine());
                     Console.Clear();
+                    if (ingrediente.precoIngrediente < 0)
+                    {
+                        Console.WriteLine("Valor inválido.");
+                        Console.ReadKey();
+                        goto case 2;
+                    }
                     ingrediente.codIngrediente = ingredientes.Count + 1;
                     var confereCod = ingredientes.Find(item => item.codIngrediente == ingrediente.codIngrediente);
                     if (confereCod != null)
