@@ -14,5 +14,7 @@ namespace SA2_Carlos
         public String descricao { get; set; }
         public List<Ingredientes> ingredientes { get; set; }
         public int codReceita { get; set; }
+
+        public double precoReceita { get; set; }
     }
 }

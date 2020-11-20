@@ -106,7 +106,30 @@ namespace SA2_Carlos
                     Console.Write("Insira o modo de preparo da receita: ");
                     R.descricao = Console.ReadLine();
                     Console.Clear();
-                    Console.Write("Insira os ingredientes usados na receita (ordem alfabética): ");
+                    opcao = 0;
+                    while (opcao != 2)
+                    {
+                        foreach(var item in ingredientes)
+                        {
+                            Console.WriteLine($"Código: {item.codIngrediente} | Nome: {item.nomeIngrediente}");
+                            Console.WriteLine();
+                        }
+                        Console.Write("Insira o codigo do ingrediente que será usado na receita: ");
+                        decisao = Convert.ToInt16(Console.ReadLine());
+                        var confereItem = ingredientes.Find(item => item.codIngrediente == decisao);
+                        if (confereItem == null)
+                        {
+                            Console.WriteLine("Código inválido.");
+                        } else
+                        {
+                            Console.Write("Insira a quantidade de ingredientes que será utilizada (1/2 = 0.5): ");
+                            confereItem.qtdIngrediente = Convert.ToInt16(Console.ReadLine());
+                            Console.Clear();
+                            Console.WriteLine("Insira a unidade de medida do ingrediente: ");
+                            confereItem.unidadeMedida = Console.ReadLine();
+                            R.ingredientes.Add(confereItem);
+                        }
+                    }
                     R.codReceita = receitas.Count + 1;
                     receitas.Add(R);
                     goto Menu;
@@ -117,7 +140,15 @@ namespace SA2_Carlos
                     Console.Write("Insira o nome do ingrediente que deseja adicionar: ");
                     ingrediente.nomeIngrediente = Console.ReadLine();
                     Console.Clear();
+                    Console.Write("Insira o preço do ingrediente: ");
+                    ingrediente.precoIngrediente = Convert.ToInt16(Console.ReadLine());
+                    Console.Clear();
                     ingrediente.codIngrediente = ingredientes.Count + 1;
+                    var confereCod = ingredientes.Find(item => item.codIngrediente == ingrediente.codIngrediente);
+                    if (confereCod != null)
+                    {
+                        ingrediente.codIngrediente += 1;
+                    }
                     ingredientes.Add(ingrediente);
                     Console.Write("Deseja adicionar mais algum ingrediente?(1 = Sim, 2 = Não): ");
                     decisao = Convert.ToInt16(Console.ReadLine());
@@ -164,7 +195,7 @@ namespace SA2_Carlos
                     Console.WriteLine("4 - Alterar o número de pessoas servidas por porção.");
                     Console.WriteLine("5 - Alterar categoria");
                     Console.WriteLine("6 - Alterar modo de preparo");
-                    Console.WriteLine("7 - Alterar ingredientes");
+                    Console.WriteLine("7 - Alterar ingredientes (os ingredientes existentes serão excluidos)");
                     Console.WriteLine("8 - Voltar ao menu principal");
                     decisao = Convert.ToInt16(Console.ReadLine());
 
@@ -275,9 +306,37 @@ namespace SA2_Carlos
 
                     if (decisao == 7)
                     {
-                        Console.Clear();
-                        Console.Write("Escreva os ingredientes que a receita utiliza: ");
-                        alterarLista.ingredientes = Console.ReadLine();
+                        alterarLista.ingredientes.RemoveAll(item => item.codIngrediente != 0);
+                        opcao = 0;
+                        while (opcao != 2)
+                        {
+                            Console.Clear();
+                            foreach (var item in ingredientes)
+                            {
+                                Console.WriteLine($"Código: {item.codIngrediente} | Nome: {item.nomeIngrediente}");
+                                Console.WriteLine();
+                            }
+                            Console.Write("Insira o codigo do ingrediente que será usado na receita: ");
+                            decisao = Convert.ToInt16(Console.ReadLine());
+                            var confereItem = ingredientes.Find(item => item.codIngrediente == decisao);
+                            if (confereItem == null)
+                            {
+                                Console.WriteLine("Código inválido.");
+                                Console.ReadKey();
+                            }
+                            else
+                            {
+                                Console.Write("Insira a quantidade de ingredientes que será utilizada (1/2 = 0.5): ");
+                                confereItem.qtdIngrediente = Convert.ToInt16(Console.ReadLine());
+                                Console.Clear();
+                                Console.WriteLine("Insira a unidade de medida do ingrediente: ");
+                                confereItem.unidadeMedida = Console.ReadLine();
+                                alterarLista.ingredientes.Add(confereItem);
+                            }
+                            Console.Clear();
+                            Console.WriteLine("Deseja adicionar outro ingrediente? (1 = Sm, 2 = Não): ");
+                            opcao = Convert.ToInt16(Console.ReadLine());
+                        }
                         goto subMenu;
                     }
 
@@ -402,6 +461,14 @@ namespace SA2_Carlos
                     break;
 
                 case 9:
+                    foreach(var item in receitas)
+                    {
+                        foreach(var r in item.ingredientes)
+                        {
+                            r.precoTotal = r.precoIngrediente + r.qtdIngrediente;
+                            Console.WriteLine($"Nome ingrediente: {r.nomeIngrediente} | Valor total do ingrediente: {r.precoTotal}");
+                        }
+                    }
                     Console.Clear();
                     Console.Write("Deseja retornar ao menu? (1 = sim, 2 = não): ");
                     decisao = Convert.ToInt16(Console.ReadLine());
@@ -415,6 +482,14 @@ namespace SA2_Carlos
                     break;
 
                 case 10:
+                    foreach (var item in receitas)
+                    {
+                        foreach (var r in item.ingredientes)
+                        {
+                            item.precoReceita += r.precoIngrediente * r.qtdIngrediente;
+                        }
+                        Console.WriteLine($"Nome receita: {item.nomeReceita} | Preço da Receita: {item.precoReceita} | Serve: {item.porcao} pessoas. |");
+                    }
                     Console.Clear();
                     Console.Write("Deseja retornar ao menu? (1 = sim, 2 = não): ");
                     decisao = Convert.ToInt16(Console.ReadLine());

@@ -11,6 +11,10 @@ namespace SA2_Carlos
         public double qtdIngrediente { get; set; }
         public String unidadeMedida { get; set; }
 
+        public double precoIngrediente { get; set; }
+
+        public double precoTotal { get; set; }
+
         /* xicara (cha)
          colher (sopa)
         colher (cha)
