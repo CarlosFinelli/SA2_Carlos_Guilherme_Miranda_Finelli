@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SA2_Carlos.Data;
+using System;
 using System.Collections.Generic;
 
 namespace SA2_Carlos
@@ -9,7 +10,7 @@ namespace SA2_Carlos
         {
          //   List<Receitas> bacon = Database.getReceitas();
             List<Receitas> receitas = DatabaseReceitas.getReceitas();
-            List<Ingredientes> ingredientes = new List<Ingredientes>();
+            List<Ingredientes> ingredientes = DatabaseIngredientes.getIngredientes();
             Ingredientes ig = new Ingredientes();
             ig.nomeIngrediente = "Arroz";
             ig.precoIngrediente = 3.00;
@@ -17,7 +18,7 @@ namespace SA2_Carlos
             ig.unidadeMedida = "g";
             ig.precoTotal = 15.00;
             ig.codIngrediente = 3;
-            ingredientes.Add(ig);
+            DatabaseIngredientes.postIngredientes(ig);
 
         Menu:
             Console.Clear();

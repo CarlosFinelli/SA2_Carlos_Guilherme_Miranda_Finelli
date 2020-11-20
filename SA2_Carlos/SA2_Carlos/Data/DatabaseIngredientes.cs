@@ -6,21 +6,21 @@ using System.Text;
 
 namespace SA2_Carlos.Data
 {
-    class DatabaseIngredientes
+    public abstract class DatabaseIngredientes
     {
         public static String diretorioReceitas = $"{Directory.GetCurrentDirectory()}\\ingredientes.json";
-        public static List<Receitas> getReceitas()
+        public static List<Ingredientes> getIngredientes()
         {
             StreamReader streamReader = new StreamReader(diretorioReceitas);
             var json = streamReader.ReadToEnd();
-            var list = JsonConvert.DeserializeObject<List<Receitas>>(json);
+            var list = JsonConvert.DeserializeObject<List<Ingredientes>>(json);
             streamReader.Close();
             return list;
         }
-        public static void postReceitas(Receitas receita)
+        public static void postIngredientes(Ingredientes ingrediente)
         {
-            List<Receitas> list = getReceitas();
-            list.Add(receita);
+            List<Ingredientes> list = getIngredientes();
+            list.Add(ingrediente);
             var stringJson = JsonConvert.SerializeObject(list);
             File.WriteAllText(diretorioReceitas, stringJson);
         }

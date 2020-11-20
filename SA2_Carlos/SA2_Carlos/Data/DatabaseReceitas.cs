@@ -5,7 +5,7 @@ using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Text;
 
-namespace SA2_Carlos
+namespace SA2_Carlos.Data
 {
     public abstract class DatabaseReceitas
     {
