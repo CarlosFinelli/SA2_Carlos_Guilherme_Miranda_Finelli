@@ -7,14 +7,24 @@ namespace SA2_Carlos
     {
         static void Main(string[] args)
         {
-            List<Receitas> receitas = new List<Receitas>();
+         //   List<Receitas> bacon = Database.getReceitas();
+            List<Receitas> receitas = DatabaseReceitas.getReceitas();
             List<Ingredientes> ingredientes = new List<Ingredientes>();
-            Menu:
+            Ingredientes ig = new Ingredientes();
+            ig.nomeIngrediente = "Arroz";
+            ig.precoIngrediente = 3.00;
+            ig.qtdIngrediente = 5;
+            ig.unidadeMedida = "g";
+            ig.precoTotal = 15.00;
+            ig.codIngrediente = 3;
+            ingredientes.Add(ig);
+
+        Menu:
             Console.Clear();
             Console.WriteLine("1 - Adicionar Receita.");
             Console.WriteLine("2 - Adicionar ingredientes");
-            Console.WriteLine("3 - Editar produto.");
-            Console.WriteLine("4 - Excluir produto.");
+            Console.WriteLine("3 - Editar receita.");
+            Console.WriteLine("4 - Excluir receita.");
             Console.WriteLine("5 - Lista de receitas.");
             Console.WriteLine("6 - Receitas por dificuldade.");
             Console.WriteLine("7 - Receitas por Categoria.");
@@ -25,7 +35,7 @@ namespace SA2_Carlos
             Console.WriteLine();
             Console.Write("Escolha uma opção: ");
             int opcao = Convert.ToInt16(Console.ReadLine());
-            switch(opcao)
+            switch (opcao)
             {
                 case 1:
                     Console.Clear();
@@ -109,26 +119,31 @@ namespace SA2_Carlos
                     opcao = 0;
                     while (opcao != 2)
                     {
-                        foreach(var item in ingredientes)
+                        foreach (var item in ingredientes)
                         {
                             Console.WriteLine($"Código: {item.codIngrediente} | Nome: {item.nomeIngrediente}");
                             Console.WriteLine();
                         }
                         Console.Write("Insira o codigo do ingrediente que será usado na receita: ");
                         decisao = Convert.ToInt16(Console.ReadLine());
-                        var confereItem = ingredientes.Find(item => item.codIngrediente == decisao);
+                        Ingredientes confereItem = new Ingredientes();
+                        confereItem = ingredientes.Find(item => item.codIngrediente == decisao);
                         if (confereItem == null)
                         {
                             Console.WriteLine("Código inválido.");
-                        } else
+                        }
+                        else
                         {
                             Console.Write("Insira a quantidade de ingredientes que será utilizada (1/2 = 0.5): ");
                             confereItem.qtdIngrediente = Convert.ToInt16(Console.ReadLine());
                             Console.Clear();
                             Console.WriteLine("Insira a unidade de medida do ingrediente: ");
                             confereItem.unidadeMedida = Console.ReadLine();
+                            R.ingredientes = new List<Ingredientes>();
                             R.ingredientes.Add(confereItem);
                         }
+                        Console.WriteLine("deseja ir para o menu insira 2?");
+                        opcao = int.Parse(Console.ReadLine());
                     }
                     R.codReceita = receitas.Count + 1;
                     receitas.Add(R);
@@ -170,14 +185,14 @@ namespace SA2_Carlos
                     Console.WriteLine("Opção inválida.");
                     Console.ReadKey();
                     goto Menu;
-                    
+
                 case 3:
                     Console.Clear();
-                    foreach(var item in receitas)
+                    foreach (var item in receitas)
                     {
                         Console.WriteLine($"Código da receita: {item.codReceita} | Nome: {item.nomeReceita} | Tempo de preparo: {item.tempoPreparacao} | Dificuldade: {item.dificuldade} | " +
                             $"Porção: {item.porcao} pessoas | Categoria: {item.categoria} | \n Descrição: {item.descricao} \n Ingredientes: \n |");
-                        foreach(var r in receitas)
+                        foreach (var r in receitas)
                         {
                             Console.WriteLine(r.ingredientes);
                         }
@@ -351,7 +366,7 @@ namespace SA2_Carlos
                         goto Menu;
                     }
                     break;
-                    
+
                 case 4:
                     Console.Clear();
                     foreach (var item in receitas)
@@ -372,12 +387,12 @@ namespace SA2_Carlos
                     }
                     receitas.Remove(removerLista);
                     goto Menu;
-                    
+
                 case 5:
                     Console.Clear();
                     foreach (var item in receitas)
-                    {
-                        Console.WriteLine(item);
+                    { 
+                        Console.WriteLine(item.nomeReceita);
                         Console.WriteLine();
                     }
                     Console.ReadKey();
@@ -417,7 +432,7 @@ namespace SA2_Carlos
                     Console.WriteLine("Obrigado por utilizar nossos serviços.");
                     Console.ReadKey();
                     break;
-                    
+
                 case 7:
                     Console.Clear();
                     receitas.Sort(delegate (Receitas r1, Receitas r2)
@@ -442,7 +457,7 @@ namespace SA2_Carlos
                     Console.WriteLine("Obrigado por utilizar nossos serviços.");
                     Console.ReadKey();
                     break;
-                    
+
                 case 8:
                     Console.Clear();
                     receitas.Sort(delegate (Receitas r1, Receitas r2)
@@ -467,9 +482,9 @@ namespace SA2_Carlos
                     break;
 
                 case 9:
-                    foreach(var item in receitas)
+                    foreach (var item in receitas)
                     {
-                        foreach(var r in item.ingredientes)
+                        foreach (var r in item.ingredientes)
                         {
                             r.precoTotal = r.precoIngrediente + r.qtdIngrediente;
                             Console.WriteLine($"Nome ingrediente: {r.nomeIngrediente} | Valor total do ingrediente: {r.precoTotal}");

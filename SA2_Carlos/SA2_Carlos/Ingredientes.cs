@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SA2_Carlos
 {
-    class Ingredientes
+    public class Ingredientes
     {
         public int codIngrediente { get; set; }
         public String nomeIngrediente { get; set; }
