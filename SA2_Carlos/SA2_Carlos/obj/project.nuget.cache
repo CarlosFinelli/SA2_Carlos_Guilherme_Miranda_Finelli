@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "dJOhK0wN+eDdKtdEXHr5Z3WbES2YmP15l3pBCF4i6e4CxJPjgbm6rchXkMJminWWN7JUKfvyEhn/2Ab4tmPAFg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Carlos\\Desktop\\Atividades Senai\\SA2_Carlos_Guilherme_Miranda_Finelli\\SA2_Carlos\\SA2_Carlos\\SA2_Carlos.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Carlos\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

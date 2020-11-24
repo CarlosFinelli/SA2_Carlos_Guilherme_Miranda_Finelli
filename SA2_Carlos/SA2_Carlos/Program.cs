@@ -1,6 +1,7 @@
 ﻿using SA2_Carlos.Data;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SA2_Carlos
 {
@@ -11,14 +12,6 @@ namespace SA2_Carlos
          //   List<Receitas> bacon = Database.getReceitas();
             List<Receitas> receitas = DatabaseReceitas.getReceitas();
             List<Ingredientes> ingredientes = DatabaseIngredientes.getIngredientes();
-            Ingredientes ig = new Ingredientes();
-            ig.nomeIngrediente = "Arroz";
-            ig.precoIngrediente = 3.00;
-            ig.qtdIngrediente = 5;
-            ig.unidadeMedida = "g";
-            ig.precoTotal = 15.00;
-            ig.codIngrediente = 3;
-            DatabaseIngredientes.postIngredientes(ig);
 
         Menu:
             Console.Clear();
@@ -39,6 +32,118 @@ namespace SA2_Carlos
             switch (opcao)
             {
                 case 1:
+                    Ingredientes ingrediente = new Ingredientes();
+                    Console.Clear();
+                    Console.Write("Insira o nome do ingrediente que deseja adicionar: ");
+                    ingrediente.nomeIngrediente = Console.ReadLine();
+                    Console.Clear();
+                    Console.Write("Insira o preço do ingrediente: ");
+                    ingrediente.precoIngrediente = Convert.ToDouble(Console.ReadLine());
+                    Console.Clear();
+                    if (ingrediente.precoIngrediente < 0)
+                    {
+                        Console.WriteLine("Valor inválido.");
+                        Console.ReadKey();
+                        goto case 1;
+                    }
+                    ingrediente.codIngrediente = ingredientes.Last().codIngrediente + 1;
+                    ingredientes.Add(ingrediente);
+                    Console.Write("Deseja adicionar mais algum ingrediente?(1 = Sim, 2 = Não): ");
+                    int decisao = Convert.ToInt16(Console.ReadLine());
+                    Console.Clear();
+                    if (decisao == 1)
+                    {
+                        goto case 1;
+                    }
+                    if (decisao == 2)
+                    {
+                        goto Menu;
+                    }
+                    DatabaseIngredientes.postIngredientes(ingrediente);
+                    goto Menu;
+
+                case 2:
+                    opcao = 0;
+                    foreach(var item in ingredientes)
+                    {
+                        Console.WriteLine($"Código da receita: {item.codIngrediente} | Nome: {item.nomeIngrediente} | Tempo de preparo: {item.precoIngrediente} |");
+                        Console.WriteLine();
+                    }
+                    Console.Write("Insira o código da receita que deseja atualizar: ");
+                    int cod = Convert.ToInt16(Console.ReadLine());
+                    var alteraIngrediente = ingredientes.Find(item => item.codIngrediente == cod);
+                    if (alteraIngrediente == null)
+                    {
+                        Console.WriteLine("CÓDIGO INVÁLIDO");
+                        Console.ReadKey();
+                        Console.Clear();
+                        goto case 2;
+                    }
+                    Console.Clear();
+                    subMenuIngredientes:
+
+                    Console.WriteLine("1 - Nome do ingrediente.");
+                    Console.WriteLine("2 - Preço do ingrediente.");
+                    Console.WriteLine();
+                    Console.Write("Insira a opção que deseja: ");
+                    decisao = Convert.ToInt16(Console.ReadLine());
+                    Console.Clear();
+                    if (decisao == 1)
+                    {
+                        Console.Write("Insira o novo nome do ingrediente: ");
+                        alteraIngrediente.nomeIngrediente = Console.ReadLine();
+                        Console.Clear();
+                        Console.Write("Deseja alterar mais alguma informação? (1 = Sim, 2 = Não): ");
+                        opcao = Convert.ToInt16(Console.ReadLine());
+                        Console.Clear();
+                        if (opcao == 1)
+                        {
+                            goto subMenuIngredientes;
+                        } else
+                        {
+                            goto Menu;
+                        }
+                    }
+                    
+                    if (decisao == 2)
+                    {
+                        Console.Write("Insira o novo preço do ingrediente: ");
+                        alteraIngrediente.precoIngrediente = Convert.ToDouble(Console.ReadLine());
+                        Console.Clear();
+                        Console.Write("Deseja alterar mais alguma informação? (1 = Sim, 2 = Não): ");
+                        opcao = Convert.ToInt16(Console.ReadLine());
+                        if (opcao == 1)
+                        {
+                            goto subMenuIngredientes;
+                        } else
+                        {
+                            goto Menu;
+                        }
+                    }
+                    DatabaseIngredientes.putIngredientes(alteraIngrediente);
+                    goto Menu;
+
+                case 3:
+                    opcao = 0;
+                    foreach (var item in ingredientes)
+                    {
+                        Console.WriteLine($"Código da receita: {item.codIngrediente} | Nome: {item.nomeIngrediente} | Tempo de preparo: {item.precoIngrediente} |");
+                        Console.WriteLine();
+                    }
+                    Console.Write("Insira o código da receita que deseja atualizar: ");
+                    cod = Convert.ToInt16(Console.ReadLine());
+                    var removeIngrediente = ingredientes.Find(item => item.codIngrediente == cod);
+                    if (removeIngrediente == null)
+                    {
+                        Console.WriteLine("CÓDIGO INVÁLIDO");
+                        Console.ReadKey();
+                        Console.Clear();
+                        goto case 3;
+                    }
+                    DatabaseIngredientes.deleteIngredientes(removeIngrediente);
+                    goto Menu;
+
+                case 4:
                     Console.Clear();
                     Receitas R = new Receitas();
                     Console.Write("Insira o nome da receita: ");
@@ -52,7 +157,7 @@ namespace SA2_Carlos
                     Console.WriteLine("3 - Difícil");
                     Console.WriteLine("4 - Muito Difícil");
                     Console.Write("Escolha o grau de dificuldade: ");
-                    int decisao = Convert.ToInt16(Console.ReadLine());
+                    decisao = Convert.ToInt16(Console.ReadLine());
                     if (decisao == 1)
                     {
                         R.dificuldade = "Fácil";
@@ -73,7 +178,7 @@ namespace SA2_Carlos
                     {
                         Console.WriteLine("Opção inválida.");
                         Console.ReadKey();
-                        goto case 1;
+                        goto case 4;
                     }
                     Console.Clear();
                     Console.Write("Insira o número de pessoas que uma porção serve: ");
@@ -111,7 +216,7 @@ namespace SA2_Carlos
                     {
                         Console.WriteLine("Opção inválida.");
                         Console.ReadKey();
-                        goto case 1;
+                        goto case 4;
                     }
                     Console.Clear();
                     Console.Write("Insira o modo de preparo da receita: ");
@@ -146,48 +251,12 @@ namespace SA2_Carlos
                         Console.WriteLine("deseja ir para o menu insira 2?");
                         opcao = int.Parse(Console.ReadLine());
                     }
-                    R.codReceita = receitas.Count + 1;
-                    receitas.Add(R);
+                    R.codReceita = receitas.Last().codReceita + 1;
+                    DatabaseReceitas.postReceitas(R);
                     goto Menu;
 
-                case 2:
-                    Ingredientes ingrediente = new Ingredientes();
-                    Console.Clear();
-                    Console.Write("Insira o nome do ingrediente que deseja adicionar: ");
-                    ingrediente.nomeIngrediente = Console.ReadLine();
-                    Console.Clear();
-                    Console.Write("Insira o preço do ingrediente: ");
-                    ingrediente.precoIngrediente = Convert.ToInt16(Console.ReadLine());
-                    Console.Clear();
-                    if (ingrediente.precoIngrediente < 0)
-                    {
-                        Console.WriteLine("Valor inválido.");
-                        Console.ReadKey();
-                        goto case 2;
-                    }
-                    ingrediente.codIngrediente = ingredientes.Count + 1;
-                    var confereCod = ingredientes.Find(item => item.codIngrediente == ingrediente.codIngrediente);
-                    if (confereCod != null)
-                    {
-                        ingrediente.codIngrediente += 1;
-                    }
-                    ingredientes.Add(ingrediente);
-                    Console.Write("Deseja adicionar mais algum ingrediente?(1 = Sim, 2 = Não): ");
-                    decisao = Convert.ToInt16(Console.ReadLine());
-                    Console.Clear();
-                    if (decisao == 1)
-                    {
-                        goto case 2;
-                    }
-                    if (decisao == 2)
-                    {
-                        goto Menu;
-                    }
-                    Console.WriteLine("Opção inválida.");
-                    Console.ReadKey();
-                    goto Menu;
 
-                case 3:
+                case 5:
                     Console.Clear();
                     foreach (var item in receitas)
                     {
@@ -200,16 +269,16 @@ namespace SA2_Carlos
                         Console.WriteLine();
                     }
                     Console.Write("Insira o CODIGO da receita que deseja editar: ");
-                    int cod = Convert.ToInt16(Console.ReadLine());
-                    var alterarLista = receitas.Find(item => item.codReceita == cod);
-                    if (alterarLista == null)
+                    cod = Convert.ToInt16(Console.ReadLine());
+                    var alterarReceita = receitas.Find(item => item.codReceita == cod);
+                    if (alterarReceita == null)
                     {
                         Console.WriteLine("Código inválido.");
                         Console.ReadKey();
                         Console.Clear();
-                        goto case 3;
+                        goto case 5;
                     }
-                subMenu:
+                subMenuReceitas:
                     Console.Clear();
                     Console.WriteLine("1 - Alterar nome");
                     Console.WriteLine("2 - Alterar tempo de preparo");
@@ -225,16 +294,16 @@ namespace SA2_Carlos
                     {
                         Console.Clear();
                         Console.Write("Insira o novo nome da receita: ");
-                        alterarLista.nomeReceita = Console.ReadLine();
-                        goto subMenu;
+                        alterarReceita.nomeReceita = Console.ReadLine();
+                        goto subMenuReceitas;
                     }
 
                     if (decisao == 2)
                     {
                         Console.Clear();
                         Console.Write("Insira o novo tempo de preparo: ");
-                        alterarLista.tempoPreparacao = Console.ReadLine();
-                        goto subMenu;
+                        alterarReceita.tempoPreparacao = Console.ReadLine();
+                        goto subMenuReceitas;
                     }
 
                     if (decisao == 3)
@@ -248,35 +317,35 @@ namespace SA2_Carlos
                         decisao = Convert.ToInt16(Console.ReadLine());
                         if (decisao == 1)
                         {
-                            alterarLista.dificuldade = "Fácil";
+                            alterarReceita.dificuldade = "Fácil";
                         }
                         if (decisao == 2)
                         {
-                            alterarLista.dificuldade = "Média";
+                            alterarReceita.dificuldade = "Média";
                         }
                         if (decisao == 3)
                         {
-                            alterarLista.dificuldade = "Difícil";
+                            alterarReceita.dificuldade = "Difícil";
                         }
                         if (decisao == 4)
                         {
-                            alterarLista.dificuldade = "Muito Difícil";
+                            alterarReceita.dificuldade = "Muito Difícil";
                         }
                         if (decisao > 4 || decisao < 1)
                         {
                             Console.WriteLine("Opção inválida.");
                             Console.ReadKey();
-                            goto subMenu;
+                            goto subMenuReceitas;
                         }
-                        goto subMenu;
+                        goto subMenuReceitas;
                     }
 
                     if (decisao == 4)
                     {
                         Console.Clear();
                         Console.Write("Informe o número de pessoas servidas por porção: ");
-                        alterarLista.porcao = Convert.ToInt16(Console.ReadLine());
-                        goto subMenu;
+                        alterarReceita.porcao = Convert.ToInt16(Console.ReadLine());
+                        goto subMenuReceitas;
                     }
 
                     if (decisao == 5)
@@ -292,29 +361,29 @@ namespace SA2_Carlos
                         decisao = Convert.ToInt16(Console.ReadLine());
                         if (decisao == 1)
                         {
-                            alterarLista.categoria = "Carne";
+                            alterarReceita.categoria = "Carne";
                         }
                         if (decisao == 2)
                         {
-                            alterarLista.categoria = "Peixe";
+                            alterarReceita.categoria = "Peixe";
                         }
                         if (decisao == 3)
                         {
-                            alterarLista.categoria = "Marisco";
+                            alterarReceita.categoria = "Marisco";
                         }
                         if (decisao == 4)
                         {
-                            alterarLista.categoria = "Pastelaria";
+                            alterarReceita.categoria = "Pastelaria";
                         }
                         if (decisao == 5)
                         {
-                            alterarLista.categoria = "Sobremesa";
+                            alterarReceita.categoria = "Sobremesa";
                         }
                         if (decisao < 1 || decisao > 5)
                         {
                             Console.WriteLine("Opção inválida.");
                             Console.ReadKey();
-                            goto subMenu;
+                            goto subMenuReceitas;
                         }
                     }
 
@@ -322,13 +391,13 @@ namespace SA2_Carlos
                     {
                         Console.Clear();
                         Console.Write("Escreva o modo de preparo da receita: ");
-                        alterarLista.descricao = Console.ReadLine();
-                        goto subMenu;
+                        alterarReceita.descricao = Console.ReadLine();
+                        goto subMenuReceitas;
                     }
 
                     if (decisao == 7)
                     {
-                        alterarLista.ingredientes.RemoveAll(item => item.codIngrediente != 0);
+                        alterarReceita.ingredientes.RemoveAll(item => item.codIngrediente != 0);
                         opcao = 0;
                         while (opcao != 2)
                         {
@@ -353,22 +422,22 @@ namespace SA2_Carlos
                                 Console.Clear();
                                 Console.WriteLine("Insira a unidade de medida do ingrediente: ");
                                 confereItem.unidadeMedida = Console.ReadLine();
-                                alterarLista.ingredientes.Add(confereItem);
+                                alterarReceita.ingredientes.Add(confereItem);
                             }
                             Console.Clear();
                             Console.WriteLine("Deseja adicionar outro ingrediente? (1 = Sm, 2 = Não): ");
                             opcao = Convert.ToInt16(Console.ReadLine());
                         }
-                        goto subMenu;
+                        goto subMenuReceitas;
                     }
-
                     if (decisao == 8)
                     {
+                        DatabaseReceitas.putReceitas(alterarReceita);
                         goto Menu;
                     }
                     break;
 
-                case 4:
+                case 6:
                     Console.Clear();
                     foreach (var item in receitas)
                     {
@@ -379,17 +448,17 @@ namespace SA2_Carlos
                     Console.Write("Insira o código da receita que deseja excluir: ");
                     cod = Convert.ToInt16(Console.ReadLine());
                     Console.Clear();
-                    var removerLista = receitas.Find(item => item.codReceita == cod);
-                    if (removerLista == null)
+                    var removerReceita = receitas.Find(item => item.codReceita == cod);
+                    if (removerReceita == null)
                     {
                         Console.WriteLine("Código inválido.");
                         Console.ReadKey();
-                        goto case 3;
+                        goto case 6;
                     }
-                    receitas.Remove(removerLista);
+                    receitas.Remove(removerReceita);
                     goto Menu;
 
-                case 5:
+                case 7:
                     Console.Clear();
                     foreach (var item in receitas)
                     { 
@@ -409,7 +478,7 @@ namespace SA2_Carlos
                     Console.ReadKey();
                     break;
 
-                case 6:
+                case 8:
                     Console.Clear();
                     receitas.Sort(delegate (Receitas r1, Receitas r2)
                     {
@@ -434,7 +503,7 @@ namespace SA2_Carlos
                     Console.ReadKey();
                     break;
 
-                case 7:
+                case 9:
                     Console.Clear();
                     receitas.Sort(delegate (Receitas r1, Receitas r2)
                     {
@@ -459,7 +528,7 @@ namespace SA2_Carlos
                     Console.ReadKey();
                     break;
 
-                case 8:
+                case 10:
                     Console.Clear();
                     receitas.Sort(delegate (Receitas r1, Receitas r2)
                     {
@@ -482,7 +551,7 @@ namespace SA2_Carlos
                     Console.ReadKey();
                     break;
 
-                case 9:
+                case 11:
                     foreach (var item in receitas)
                     {
                         foreach (var r in item.ingredientes)
@@ -503,7 +572,7 @@ namespace SA2_Carlos
                     Console.ReadKey();
                     break;
 
-                case 10:
+                case 12:
                     foreach (var item in receitas)
                     {
                         foreach (var r in item.ingredientes)

@@ -1,0 +1,14 @@
+C:\Users\Carlos\Desktop\Atividades Senai\SA2_Carlos_Guilherme_Miranda_Finelli\SA2_Carlos\SA2_Carlos\bin\Debug\netcoreapp3.1\SA2_Carlos.exe
+C:\Users\Carlos\Desktop\Atividades Senai\SA2_Carlos_Guilherme_Miranda_Finelli\SA2_Carlos\SA2_Carlos\bin\Debug\netcoreapp3.1\SA2_Carlos.deps.json
+C:\Users\Carlos\Desktop\Atividades Senai\SA2_Carlos_Guilherme_Miranda_Finelli\SA2_Carlos\SA2_Carlos\bin\Debug\netcoreapp3.1\SA2_Carlos.runtimeconfig.json
+C:\Users\Carlos\Desktop\Atividades Senai\SA2_Carlos_Guilherme_Miranda_Finelli\SA2_Carlos\SA2_Carlos\bin\Debug\netcoreapp3.1\SA2_Carlos.runtimeconfig.dev.json
+C:\Users\Carlos\Desktop\Atividades Senai\SA2_Carlos_Guilherme_Miranda_Finelli\SA2_Carlos\SA2_Carlos\bin\Debug\netcoreapp3.1\SA2_Carlos.dll
+C:\Users\Carlos\Desktop\Atividades Senai\SA2_Carlos_Guilherme_Miranda_Finelli\SA2_Carlos\SA2_Carlos\bin\Debug\netcoreapp3.1\SA2_Carlos.pdb
+C:\Users\Carlos\Desktop\Atividades Senai\SA2_Carlos_Guilherme_Miranda_Finelli\SA2_Carlos\SA2_Carlos\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Carlos\Desktop\Atividades Senai\SA2_Carlos_Guilherme_Miranda_Finelli\SA2_Carlos\SA2_Carlos\obj\Debug\netcoreapp3.1\SA2_Carlos.AssemblyInfoInputs.cache
+C:\Users\Carlos\Desktop\Atividades Senai\SA2_Carlos_Guilherme_Miranda_Finelli\SA2_Carlos\SA2_Carlos\obj\Debug\netcoreapp3.1\SA2_Carlos.AssemblyInfo.cs
+C:\Users\Carlos\Desktop\Atividades Senai\SA2_Carlos_Guilherme_Miranda_Finelli\SA2_Carlos\SA2_Carlos\obj\Debug\netcoreapp3.1\SA2_Carlos.csproj.CoreCompileInputs.cache
+C:\Users\Carlos\Desktop\Atividades Senai\SA2_Carlos_Guilherme_Miranda_Finelli\SA2_Carlos\SA2_Carlos\obj\Debug\netcoreapp3.1\SA2_Carlos.csproj.CopyComplete
+C:\Users\Carlos\Desktop\Atividades Senai\SA2_Carlos_Guilherme_Miranda_Finelli\SA2_Carlos\SA2_Carlos\obj\Debug\netcoreapp3.1\SA2_Carlos.dll
+C:\Users\Carlos\Desktop\Atividades Senai\SA2_Carlos_Guilherme_Miranda_Finelli\SA2_Carlos\SA2_Carlos\obj\Debug\netcoreapp3.1\SA2_Carlos.pdb
+C:\Users\Carlos\Desktop\Atividades Senai\SA2_Carlos_Guilherme_Miranda_Finelli\SA2_Carlos\SA2_Carlos\obj\Debug\netcoreapp3.1\SA2_Carlos.genruntimeconfig.cache
