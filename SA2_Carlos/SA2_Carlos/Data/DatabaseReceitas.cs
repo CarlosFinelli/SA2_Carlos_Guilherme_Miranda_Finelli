@@ -25,5 +25,23 @@ namespace SA2_Carlos.Data
             var stringJson = JsonConvert.SerializeObject(list);
             File.WriteAllText(diretorioReceitas, stringJson);
         }
+
+        public static void putReceitas(Receitas receita)
+        {
+            List<Receitas> list = getReceitas();
+            var atualizaReceita = list.Find(item => item.codReceita == receita.codReceita);
+            atualizaReceita = receita;
+            var stringJson = JsonConvert.SerializeObject(list);
+            File.WriteAllText(diretorioReceitas, stringJson);
+        }
+
+        public static void deleteReceitas(Receitas receita)
+        {
+            List<Receitas> list = getReceitas();
+            var removeReceita = list.Find(item => item.codReceita == receita.codReceita);
+            list.Remove(removeReceita);
+            var stringJson = JsonConvert.SerializeObject(list);
+            File.WriteAllText(diretorioReceitas, stringJson);
+        }
     }
 }

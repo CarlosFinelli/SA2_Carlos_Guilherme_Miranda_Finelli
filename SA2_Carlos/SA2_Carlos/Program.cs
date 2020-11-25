@@ -9,22 +9,23 @@ namespace SA2_Carlos
     {
         static void Main(string[] args)
         {
-         //   List<Receitas> bacon = Database.getReceitas();
             List<Receitas> receitas = DatabaseReceitas.getReceitas();
             List<Ingredientes> ingredientes = DatabaseIngredientes.getIngredientes();
 
         Menu:
             Console.Clear();
-            Console.WriteLine("1 - Adicionar Receita.");
-            Console.WriteLine("2 - Adicionar ingredientes");
-            Console.WriteLine("3 - Editar receita.");
-            Console.WriteLine("4 - Excluir receita.");
-            Console.WriteLine("5 - Lista de receitas.");
-            Console.WriteLine("6 - Receitas por dificuldade.");
-            Console.WriteLine("7 - Receitas por Categoria.");
-            Console.WriteLine("8 - Receitas por tempo de preparo.");
-            Console.WriteLine("9 - Cotação de ingredientes.");
-            Console.WriteLine("10 - Valor estimado da receita.");
+            Console.WriteLine("1 - Adicionar ingredientes.");
+            Console.WriteLine("2 - Editar ingrediente.");
+            Console.WriteLine("3 - Remover ingrediente.");
+            Console.WriteLine("4 - Adicionar receita");
+            Console.WriteLine("5 - Editar receita.");
+            Console.WriteLine("6 - Excluir receita.");
+            Console.WriteLine("7 - Lista de receitas.");
+            Console.WriteLine("8 - Receitas por dificuldade.");
+            Console.WriteLine("9 - Receitas por Categoria.");
+            Console.WriteLine("10 - Receitas por tempo de preparo.");
+            Console.WriteLine("11 - Cotação de ingredientes.");
+            Console.WriteLine("12 - Valor estimado da receita.");
             Console.WriteLine("0 - Adicionar produto.");
             Console.WriteLine();
             Console.Write("Escolha uma opção: ");
@@ -455,7 +456,7 @@ namespace SA2_Carlos
                         Console.ReadKey();
                         goto case 6;
                     }
-                    receitas.Remove(removerReceita);
+                    DatabaseReceitas.deleteReceitas(removerReceita);
                     goto Menu;
 
                 case 7:
