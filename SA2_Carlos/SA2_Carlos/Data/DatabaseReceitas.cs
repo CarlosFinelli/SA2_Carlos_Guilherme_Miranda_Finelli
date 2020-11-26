@@ -30,7 +30,8 @@ namespace SA2_Carlos.Data
         {
             List<Receitas> list = getReceitas();
             var atualizaReceita = list.Find(item => item.codReceita == receita.codReceita);
-            atualizaReceita = receita;
+            list.Remove(atualizaReceita);
+            list.Add(receita);
             var stringJson = JsonConvert.SerializeObject(list);
             File.WriteAllText(diretorioReceitas, stringJson);
         }

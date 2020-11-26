@@ -12,3 +12,4 @@ C:\Users\Carlos\Desktop\Atividades Senai\SA2_Carlos_Guilherme_Miranda_Finelli\SA
 C:\Users\Carlos\Desktop\Atividades Senai\SA2_Carlos_Guilherme_Miranda_Finelli\SA2_Carlos\SA2_Carlos\obj\Debug\netcoreapp3.1\SA2_Carlos.dll
 C:\Users\Carlos\Desktop\Atividades Senai\SA2_Carlos_Guilherme_Miranda_Finelli\SA2_Carlos\SA2_Carlos\obj\Debug\netcoreapp3.1\SA2_Carlos.pdb
 C:\Users\Carlos\Desktop\Atividades Senai\SA2_Carlos_Guilherme_Miranda_Finelli\SA2_Carlos\SA2_Carlos\obj\Debug\netcoreapp3.1\SA2_Carlos.genruntimeconfig.cache
+C:\Users\Carlos\Desktop\Atividades Senai\SA2_Carlos_Guilherme_Miranda_Finelli\SA2_Carlos\SA2_Carlos\obj\Debug\netcoreapp3.1\SA2_Carlos.csprojAssemblyReference.cache

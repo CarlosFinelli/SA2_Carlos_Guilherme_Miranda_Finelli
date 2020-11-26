@@ -33,5 +33,8 @@ namespace SA2_Carlos
 
         [JsonProperty(PropertyName = "precoReceita")]
         public double precoReceita { get; set; }
+
+        [JsonProperty(PropertyName = "codDificuldade")]
+        public int codDificuldade { get; set; }
     }
 }

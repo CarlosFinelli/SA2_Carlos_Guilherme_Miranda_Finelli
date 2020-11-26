@@ -29,7 +29,8 @@ namespace SA2_Carlos.Data
         {
             List<Ingredientes> list = getIngredientes();
             var atualizaIngrediente = list.Find(item => item.codIngrediente == ingrediente.codIngrediente);
-            atualizaIngrediente = ingrediente;
+            list.Remove(atualizaIngrediente);
+            list.Add(ingrediente);
             var stringJson = JsonConvert.SerializeObject(list);
             File.WriteAllText(diretorioIngredientes, stringJson);
         }
