@@ -259,11 +259,11 @@ namespace SA2_Carlos
                         }
                         else
                         {
+                            Console.Write("Insira a unidade de medida do ingrediente (KG, g, etc): ");
+                            confereItem.unidadeMedida = Console.ReadLine();
+                            Console.Clear();
                             Console.Write("Insira a quantidade de ingredientes que será utilizada (1/2 = 0,5, 100 g = 0,1 Kg): ");
                             confereItem.qtdIngrediente = Convert.ToDouble(Console.ReadLine());
-                            Console.Clear();
-                            Console.Write("Insira a unidade de medida do ingrediente: ");
-                            confereItem.unidadeMedida = Console.ReadLine();
                             R.ingredientes = new List<Ingredientes>();
                             R.ingredientes.Add(confereItem);
                         }
