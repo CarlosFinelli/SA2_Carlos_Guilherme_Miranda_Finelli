@@ -8,7 +8,7 @@ namespace SA2_Carlos.Data
 {
     public abstract class DatabaseIngredientes
     {
-        public static String diretorioIngredientes = $"{Directory.GetCurrentDirectory()}\\ingredientes.json";
+        public static String diretorioIngredientes = $"{Environment.CurrentDirectory}\\ingredientes.json";
         public static List<Ingredientes> getIngredientes()
         {
             StreamReader streamReader = new StreamReader(diretorioIngredientes);
