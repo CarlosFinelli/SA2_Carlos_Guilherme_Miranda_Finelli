@@ -152,6 +152,7 @@ namespace SA2_Carlos
                 case 4:
                     Console.Clear();
                     Receitas R = new Receitas();
+                    R.ingredientes = new List<Ingredientes>();
                     Console.Write("Insira o nome da receita: ");
                     R.nomeReceita = Console.ReadLine();
                     Console.Clear();
@@ -264,7 +265,6 @@ namespace SA2_Carlos
                             Console.Clear();
                             Console.Write("Insira a quantidade de ingredientes que será utilizada (1/2 = 0,5, 100 g = 0,1 Kg): ");
                             confereItem.qtdIngrediente = Convert.ToDouble(Console.ReadLine());
-                            R.ingredientes = new List<Ingredientes>();
                             R.ingredientes.Add(confereItem);
                         }
                         Console.Clear();

@@ -9,7 +9,7 @@ namespace SA2_Carlos.Data
 {
     public abstract class DatabaseReceitas
     {
-        public static String diretorioReceitas = $"{Directory.GetCurrentDirectory()}\\receitas.json";
+        public static String diretorioReceitas = $"{Directory.GetDirectoryRoot("C:\\SA2_Carlos\\receitas.json")}";
         public static List<Receitas> getReceitas()
         {
             StreamReader streamReader = new StreamReader(diretorioReceitas);
