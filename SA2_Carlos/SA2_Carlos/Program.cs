@@ -145,6 +145,13 @@ namespace SA2_Carlos
                         Console.ReadKey();
                         goto Menu;
                     }
+                    foreach (var item in ingredientes)
+                    {
+                        if (item.codIngrediente > removeIngrediente.codIngrediente)
+                        {
+                            item.codIngrediente -= 1;
+                        }
+                    }
                     ingredientes.Remove(removeIngrediente);
                     DatabaseIngredientes.deleteIngredientes(removeIngrediente);
                     goto Menu;
@@ -502,6 +509,13 @@ namespace SA2_Carlos
                         Console.WriteLine("Código inválido.");
                         Console.ReadKey();
                         goto Menu;
+                    }
+                    foreach (var item in receitas)
+                    {
+                        if (item.codReceita > removerReceita.codReceita)
+                        {
+                            item.codReceita -= 1;
+                        }
                     }
                     receitas.Remove(removerReceita);
                     DatabaseReceitas.deleteReceitas(removerReceita);
