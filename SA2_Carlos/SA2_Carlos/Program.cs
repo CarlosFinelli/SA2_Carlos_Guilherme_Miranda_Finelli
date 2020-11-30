@@ -81,9 +81,9 @@ namespace SA2_Carlos
                     var alteraIngrediente = ingredientes.Find(item => item.codIngrediente == cod);
                     if (alteraIngrediente == null)
                     {
+                        Console.Clear();
                         Console.WriteLine("CÓDIGO INVÁLIDO");
                         Console.ReadKey();
-                        Console.Clear();
                         goto Menu;
                     }
                     Console.Clear();
@@ -140,9 +140,9 @@ namespace SA2_Carlos
                     var removeIngrediente = ingredientes.Find(item => item.codIngrediente == cod);
                     if (removeIngrediente == null)
                     {
+                        Console.Clear();
                         Console.WriteLine("CÓDIGO INVÁLIDO");
                         Console.ReadKey();
-                        Console.Clear();
                         goto Menu;
                     }
                     ingredientes.Remove(removeIngrediente);
@@ -257,6 +257,7 @@ namespace SA2_Carlos
                         if (confereItem == null)
                         {
                             Console.WriteLine("Código inválido.");
+                            Console.ReadKey();
                         }
                         else
                         {
@@ -303,9 +304,9 @@ namespace SA2_Carlos
                     var alterarReceita = receitas.Find(item => item.codReceita == cod);
                     if (alterarReceita == null)
                     {
+                        Console.Clear();
                         Console.WriteLine("Código inválido.");
                         Console.ReadKey();
-                        Console.Clear();
                         goto case 5;
                     }
                 subMenuReceitas:
@@ -450,8 +451,10 @@ namespace SA2_Carlos
                             var confereItem = ingredientes.Find(item => item.codIngrediente == decisao);
                             if (confereItem == null)
                             {
+                                Console.Clear();
                                 Console.WriteLine("Código inválido.");
                                 Console.ReadKey();
+                                goto Menu;
                             }
                             else
                             {
@@ -463,7 +466,7 @@ namespace SA2_Carlos
                                 alterarReceita.ingredientes.Add(confereItem);
                             }
                             Console.Clear();
-                            Console.WriteLine("Deseja adicionar outro ingrediente? (1 = Sim, 2 = Não): ");
+                            Console.Write("Deseja adicionar outro ingrediente? (1 = Sim, 2 = Não): ");
                             opcao = Convert.ToInt16(Console.ReadLine());
                         }
                         goto subMenuReceitas;
@@ -597,6 +600,7 @@ namespace SA2_Carlos
                         Console.WriteLine();
                     });
                     Console.ReadKey();
+                    Console.Clear();
                     Console.Write("Deseja retornar ao menu? (1 = Sim, 2 = Não): ");
                     decisao = Convert.ToInt16(Console.ReadLine());
                     if (decisao == 1)
